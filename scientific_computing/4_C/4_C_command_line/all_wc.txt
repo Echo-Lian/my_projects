@@ -1,0 +1,11 @@
+      25     110     616 add_shebang.sh
+       3       6      33 all_f_file.txt
+       3       3      45 all_v2_filename.txt
+       0       0       0 all_wc.txt
+       3      15      70 f1.txt
+       3      15      70 f2.txt
+       3      15      70 f3.txt
+       1       4      12 first_line.sh
+       9      11      76 marco.sh
+       1       2       5 wc.sh
+      51     181     997 total
