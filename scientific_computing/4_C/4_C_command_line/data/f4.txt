@@ -1,0 +1,5 @@
+#!/bin/bash
+This is a line under shebang.
+This is the very very first line of text.
+This is the first line.
+This is the very first line.

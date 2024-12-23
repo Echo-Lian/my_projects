@@ -1,0 +1,13 @@
+#!/bin/bash
+$variable
+$variable
+"$variable"
+$variable
+$variable
+$shebang
+$shebang
+Here is some text.
+$shebang
+today,2024-12-23
+yesterday,2024-12-22
+tomorrow,2024-12-24
