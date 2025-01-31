@@ -1,0 +1,2255 @@
+kind: BotDefinition
+entity:
+  schemaName: crf32_koneProfileAgent
+  cdsBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+  accessControlPolicy: ChatbotReaders
+  authenticationMode: Integrated
+  authenticationTrigger: Always
+  configuration:
+    settings:
+      GenerativeActionsEnabled: generative
+
+    gPTSettings:
+      defaultSchemaName: crf32_koneProfileAgent.gpt.default
+
+    aISettings:
+      useModelKnowledge: false
+      isFileAnalysisEnabled: false
+      isSemanticSearchEnabled: false
+
+  language: 1033
+
+components:
+  - kind: DialogComponent
+    version: 8181164
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:10.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:10.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Reset Conversation
+    id: 07ec3e1b-a9b9-4e06-8b0a-159fdabb99ec
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.ResetConversation
+    dialog:
+      startBehavior: UseLatestPublishedContentAndCancelOtherTopics
+      beginDialog:
+        kind: OnSystemRedirect
+        id: main
+        actions:
+          - kind: SendActivity
+            id: sendMessage_OPsT1O
+            activity: What can I help you with?
+
+          - kind: ClearAllVariables
+            id: clearAllVariables_73bTFR
+            variables: ConversationScopedVariables
+
+          - kind: CancelAllDialogs
+            id: cancelAllDialogs_12Gt21
+
+  - kind: DialogComponent
+    version: 8181178
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:11.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:11.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Conversation Start
+    id: 1307812f-e1e5-47de-bb6f-7ae5826c16f0
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This system topic triggers when the copilot receives an Activity indicating the beginning of a new conversation. If you do not want the copilot to initiate the conversation, disable this topic.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.ConversationStart
+    dialog:
+      beginDialog:
+        kind: OnConversationStart
+        id: main
+        actions:
+          - kind: SendActivity
+            id: sendMessage_M0LuhV
+            activity:
+              text:
+                - Hello, I'm {System.Bot.Name}, a virtual assistant. Just so you are aware, I sometimes use AI to answer your questions. If you provided a website during creation, try asking me about it! Next try giving me some more knowledge by setting up generative AI.
+              speak:
+                - Thanks for calling, how can I help?
+
+  - kind: GptComponent
+    version: 8181188
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:11.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:11.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: KONE profile Agent
+    id: 2d302368-2ab8-4072-a2fe-9d73c09a49a2
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This agent is searching for information on KONE company. Users who want to know the details of KONE can interact with this agent and get a reply.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.gpt.default
+    metadata:
+      instructions: Users can ask questions for instance, what kind of a company is KONE?
+      gptCapabilities: {}
+
+  - kind: DialogComponent
+    version: 8181129
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:08.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:08.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Thank you
+    id: 3c0ad23e-22e9-4bc0-b6ba-b96effa2d9e5
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This topic triggers when the user says thank you.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.ThankYou
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Thank you
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - thanks
+            - thank you
+            - thanks so much
+            - ty
+
+        actions:
+          - kind: SendActivity
+            id: sendMessage_9iz6v7
+            activity: You're welcome.
+
+  - kind: DialogComponent
+    version: 8181134
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:09.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:09.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: On Error
+    id: 3d631a2f-cd47-4278-861d-0e8d7bd60832
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This system topic triggers when the copilot encounters an error. When using the test chat pane, the full error description is displayed.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.OnError
+    dialog:
+      beginDialog:
+        kind: OnError
+        id: main
+        actions:
+          - kind: SetVariable
+            id: setVariable_timestamp
+            variable: init:Topic.CurrentTime
+            value: =Text(Now(), DateTimeFormat.UTC)
+
+          - kind: ConditionGroup
+            id: condition_1
+            conditions:
+              - id: bL4wmY
+                condition: =System.Conversation.InTestMode = true
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_XJBYMo
+                    activity: |-
+                      Error Message: {System.Error.Message}
+                      Error Code: {System.Error.Code}
+                      Conversation Id: {System.Conversation.Id}
+                      Time (UTC): {Topic.CurrentTime}
+
+            elseActions:
+              - kind: SendActivity
+                id: sendMessage_dZ0gaF
+                activity:
+                  text:
+                    - |-
+                      An error has occurred.
+                      Error code: {System.Error.Code}
+                      Conversation Id: {System.Conversation.Id}
+                      Time (UTC): {Topic.CurrentTime}.
+                  speak:
+                    - An error has occurred, please try again.
+
+          - kind: LogCustomTelemetryEvent
+            id: 9KwEAn
+            eventName: OnErrorLog
+            properties: "={ErrorMessage: System.Error.Message, ErrorCode: System.Error.Code, TimeUTC: Topic.CurrentTime, ConversationId: System.Conversation.Id}"
+
+          - kind: CancelAllDialogs
+            id: NW7NyY
+
+  - kind: DialogComponent
+    version: 8181111
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:08:58.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:08:58.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Start Over
+    id: 3e6377e1-a381-4975-99d7-d0adea434f24
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.StartOver
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Start Over
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - let's begin again
+            - start over
+            - start again
+            - restart
+
+        actions:
+          - kind: Question
+            id: question_zguoVV
+            alwaysPrompt: false
+            variable: init:Topic.Confirm
+            prompt: Are you sure you want to restart the conversation?
+            entity: BooleanPrebuiltEntity
+
+          - kind: ConditionGroup
+            id: conditionGroup_lvx2zV
+            conditions:
+              - id: conditionItem_sVQtHa
+                condition: =Topic.Confirm = true
+                actions:
+                  - kind: BeginDialog
+                    id: 0YKYsy
+                    dialog: crf32_koneProfileAgent.topic.ResetConversation
+
+            elseActions:
+              - kind: SendActivity
+                id: sendMessage_lk2CyQ
+                activity: Ok. Let's carry on.
+
+  - kind: ExternalTriggerComponent
+    version: 8245341
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-31T09:21:24.0000000Z
+      modifiedTimeUtc: 2025-01-31T09:21:24.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Recurring Copilot Trigger
+    id: 5c2b0ad1-112c-406c-8523-cd55045e2305
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: Create a trigger to automatically call your copilot repeatedly
+    shareContext:
+      iconUri: https://content.powerapps.com/resource/makerx/static/media/RecurrenceIcon.816b06a2.svg
+
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.component.RecurringCopilotTrigger_D8QI6lVl9Xs7oaLRB98I5
+    configuration:
+      externalTriggerSource:
+        kind: WorkflowExternalTrigger
+        flowId: 835583b4-b4df-ef11-a730-000d3a81ed14
+
+      extensionData:
+        flowName: 0f905a44-ffc2-f485-64c2-520cfcbb3277
+        flowUrl: /providers/Microsoft.ProcessSimple/environments/Default-26ccfbb4-7816-4f43-a236-b6fffb84cfc1/flows/0f905a44-ffc2-f485-64c2-520cfcbb3277
+        triggerConnectionType: Schedule
+
+  - kind: KnowledgeSourceComponent
+    version: 8181193
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:11.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:11.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: https://www.kone.com/en/company/
+    id: 5c711868-ef09-4c3d-8abd-b47d063aa1b7
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This knowledge source searches information on the web found in https://www.kone.com/en/company/ website
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.knowledge.PublicSiteSearchSource.0
+    configuration:
+      source:
+        kind: PublicSiteSearchSource
+        site: https://www.kone.com/en/company/
+
+  - kind: DialogComponent
+    version: 8245243
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-31T09:19:14.0000000Z
+      modifiedTimeUtc: 2025-01-31T09:19:14.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: MSN Weather - Get forecast for today
+    id: 8e9a0e92-3908-4543-919c-530255a08e79
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.component.MSNWeather-Getforecastfortoday
+    dialog:
+      kind: TaskDialog
+      modelDisplayName: Get forecast for today
+      modelDescription: Get the forecast for the current day in the specified location.
+      outputs:
+        - propertyName: responses.almanac.moonPhase
+
+        - propertyName: responses.almanac.moonPhaseCode
+
+        - propertyName: responses.almanac.moonrise
+
+        - propertyName: responses.almanac.moonset
+
+        - propertyName: responses.almanac.sunrise
+
+        - propertyName: responses.almanac.sunset
+
+        - propertyName: responses.daily.created
+
+        - propertyName: responses.daily.day.cap
+
+        - propertyName: responses.daily.day.precip
+
+        - propertyName: responses.daily.day.sky
+
+        - propertyName: responses.daily.day.summary
+
+        - propertyName: responses.daily.day.windDir
+
+        - propertyName: responses.daily.day.windSpd
+
+        - propertyName: responses.daily.day.wx
+
+        - propertyName: responses.daily.night.cap
+
+        - propertyName: responses.daily.night.precip
+
+        - propertyName: responses.daily.night.sky
+
+        - propertyName: responses.daily.night.summary
+
+        - propertyName: responses.daily.night.windDir
+
+        - propertyName: responses.daily.night.windSpd
+
+        - propertyName: responses.daily.night.wx
+
+        - propertyName: responses.daily.precip
+
+        - propertyName: responses.daily.pvdrCap
+
+        - propertyName: responses.daily.rhHi
+
+        - propertyName: responses.daily.rhLo
+
+        - propertyName: responses.daily.tempHi
+
+        - propertyName: responses.daily.tempLo
+
+        - propertyName: responses.daily.uv
+
+        - propertyName: responses.daily.uvDesc
+
+        - propertyName: responses.daily.valid
+
+        - propertyName: responses.daily.windMax
+
+        - propertyName: responses.daily.windMaxDir
+
+        - propertyName: responses.source.coordinates.lat
+
+        - propertyName: responses.source.coordinates.lon
+
+        - propertyName: responses.source.location
+
+        - propertyName: units.distance
+
+        - propertyName: units.pressure
+
+        - propertyName: units.speed
+
+        - propertyName: units.temperature
+
+      action:
+        kind: InvokeConnectorTaskAction
+        connectionReference: crf32_koneProfileAgent.shared_msnweather.shared-msnweather-0fe7a16d-b5b2-4824-99cb-4eb0186b66e0
+        connectionProperties:
+          mode: Invoker
+
+        operationId: TodaysForecast
+
+      outputMode: Specific
+
+  - kind: DialogComponent
+    version: 8181149
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:09.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:09.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Goodbye
+    id: 9279f79b-e0fe-4b52-9270-5450f9c262b9
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This topic triggers when the user says goodbye. By default, it does not end the conversation. If you would like to end the conversation when the user says goodbye, you can add an "End of Conversation" action to this topic, or redirect to the "End of Conversation" system topic.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.Goodbye
+    dialog:
+      startBehavior: CancelOtherTopics
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Goodbye
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - Bye
+            - Bye for now
+            - Bye now
+            - Good bye
+            - No thank you. Goodbye.
+            - See you later
+
+        actions:
+          - kind: Question
+            id: question_zf2HhP
+            variable: Topic.EndConversation
+            prompt: Would you like to end our conversation?
+            entity: BooleanPrebuiltEntity
+
+          - kind: ConditionGroup
+            id: condition_DGc1Wy
+            conditions:
+              - id: condition_DGc1Wy-item-0
+                condition: =Topic.EndConversation = true
+                actions:
+                  - kind: BeginDialog
+                    id: dn94DC
+                    dialog: crf32_koneProfileAgent.topic.EndofConversation
+
+              - id: condition_DGc1Wy-item-1
+                condition: =Topic.EndConversation = false
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_LdLhmf
+                    activity: Go ahead. I'm listening.
+
+  - kind: DialogComponent
+    version: 8181168
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:10.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:10.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Escalate
+    id: 95c59b74-3c12-4797-a570-9778c04b846e
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: |-
+      This system topic is triggered when the user indicates they would like to speak to a human agent.
+      You can configure how the copilot will handle human hand-off scenarios in the copilot settings.
+      If your copilot does not handle escalations, this topic should be disabled.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.Escalate
+    dialog:
+      startBehavior: CancelOtherTopics
+      beginDialog:
+        kind: OnEscalate
+        id: main
+        intent:
+          displayName: Escalate
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - Talk to agent
+            - Talk to a person
+            - Talk to someone
+            - Call back
+            - Call customer service
+            - Call me please
+            - Call support
+            - Call technical support
+            - Can an agent call me
+            - Can I call
+            - Can I get in touch with someone else
+            - Can I get real agent support
+            - Can I get transferred to a person to call
+            - Can I have a call in number Or can I be called
+            - Can I have a representative call me
+            - Can I schedule a call
+            - Can I speak to a representative
+            - Can I talk to a human
+            - Can I talk to a human assistant
+            - Can someone call me
+            - Chat with a human
+            - Chat with a representative
+            - Chat with agent
+            - Chat with someone please
+            - Connect me to a live agent
+            - Connect me to a person
+            - Could some one contact me by phone
+            - Customer agent
+            - Customer representative
+            - Customer service
+            - I need a manager to contact me
+            - I need customer service
+            - I need help from a person
+            - I need to speak with a live argent
+            - I need to talk to a specialist please
+            - I want to talk to customer service
+            - I want to proceed with live support
+            - I want to speak with a consultant
+            - I want to speak with a live tech
+            - I would like to speak with an associate
+            - I would like to talk to a technician
+            - Talk with tech support member
+
+        actions:
+          - kind: SendActivity
+            id: sendMessage_s39DCt
+            conversationOutcome: Escalated
+            activity: |-
+              Escalating to a live agent is not currently configured for this copilot, however this is where the copilot could provide information about how to get in touch with someone another way.
+              
+              Is there anything else I can help you with?
+
+  - kind: DialogComponent
+    version: 8181154
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:09.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:09.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Multiple Topics Matched
+    id: 9ce9f9fd-5ab8-43d9-83d4-132a5dfb8213
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This system topic triggers when the copilot matches multiple Topics with the incoming message and needs to clarify which one should be triggered.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.MultipleTopicsMatched
+    dialog:
+      beginDialog:
+        kind: OnSelectIntent
+        id: main
+        triggerBehavior: Always
+        actions:
+          - kind: SetVariable
+            id: setVariable_M6434i
+            variable: init:Topic.IntentOptions
+            value: =System.Recognizer.IntentOptions
+
+          - kind: SetTextVariable
+            id: setTextVariable_0
+            variable: Topic.NoneOfTheseDisplayName
+            value: None of these
+
+          - kind: EditTable
+            id: sendMessage_g5Ls09
+            changeType: Add
+            itemsVariable: Topic.IntentOptions
+            value: "={ DisplayName: Topic.NoneOfTheseDisplayName, TopicId: \"NoTopic\", TriggerId: \"NoTrigger\", Score: 1.0 }"
+
+          - kind: Question
+            id: question_zf2HhP
+            interruptionPolicy:
+              allowInterruption: false
+
+            alwaysPrompt: true
+            variable: System.Recognizer.SelectedIntent
+            prompt: "To clarify, did you mean:"
+            entity:
+              kind: DynamicClosedListEntity
+              items: =Topic.IntentOptions
+
+          - kind: ConditionGroup
+            id: conditionGroup_60PuXb
+            conditions:
+              - id: conditionItem_rs7GgM
+                condition: =System.Recognizer.SelectedIntent.TopicId = "NoTopic"
+                actions:
+                  - kind: ReplaceDialog
+                    id: YZXRDb
+                    dialog: crf32_koneProfileAgent.topic.Fallback
+
+  - kind: DialogComponent
+    version: 8181159
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:10.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:10.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Greeting
+    id: b4e0d6b7-c15f-4e80-ab95-4c6320c08184
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This topic is triggered when the user greets the copilot.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.Greeting
+    dialog:
+      beginDialog:
+        kind: OnRecognizedIntent
+        id: main
+        intent:
+          displayName: Greeting
+          includeInOnSelectIntent: false
+          triggerQueries:
+            - Good afternoon
+            - Good morning
+            - Hello
+            - Hey
+            - Hi
+
+        actions:
+          - kind: SendActivity
+            id: sendMessage_abmysR
+            activity:
+              text:
+                - Hello, how can I help you today?
+              speak:
+                - Hello, <break strength="medium" /> how can I help?
+
+          - kind: CancelAllDialogs
+            id: cancelAllDialogs_01At22
+
+  - kind: DialogComponent
+    version: 8245271
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:09.0000000Z
+      modifiedTimeUtc: 2025-01-31T09:20:01.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Conversational boosting
+    id: be6446ed-2236-4339-bc63-38ce59a15ccb
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: Create generative answers from knowledge sources.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.Search
+    dialog:
+      beginDialog:
+        kind: OnUnknownIntent
+        id: main
+        priority: -1
+        actions:
+          - kind: SearchAndSummarizeContent
+            id: search-content
+            variable: Topic.Answer
+            userInput: =System.Activity.Text
+            moderationLevel: High
+            publicDataSource: {}
+            sharePointSearchDataSource: {}
+
+          - kind: ConditionGroup
+            id: has-answer-conditions
+            conditions:
+              - id: has-answer
+                condition: =!IsBlank(Topic.Answer)
+                actions:
+                  - kind: EndDialog
+                    id: end-topic
+                    clearTopicQueue: true
+
+  - kind: DialogComponent
+    version: 8181173
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:10.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:10.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: End of Conversation
+    id: da63eea2-ef91-4cd6-b45c-e96d2953a490
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: |-
+      This system topic is only triggered by a redirect action,
+      and guides the user through rating their conversation with the copilot.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.EndofConversation
+    dialog:
+      startBehavior: CancelOtherTopics
+      beginDialog:
+        kind: OnSystemRedirect
+        id: main
+        actions:
+          - kind: Question
+            id: 41d42054-d4cb-4e90-b922-2b16b37fe379
+            conversationOutcome: ResolvedImplied
+            alwaysPrompt: true
+            variable: init:Topic.SurveyResponse
+            prompt: Did that answer your question?
+            entity: BooleanPrebuiltEntity
+
+          - kind: ConditionGroup
+            id: condition-0
+            conditions:
+              - id: condition-0-item-0
+                condition: =Topic.SurveyResponse = true
+                actions:
+                  - kind: CSATQuestion
+                    id: csat_1
+                    conversationOutcome: ResolvedConfirmed
+
+                  - kind: SendActivity
+                    id: sendMessage_8r29O0
+                    activity: Thanks for your feedback.
+
+                  - kind: Question
+                    id: question_1
+                    alwaysPrompt: true
+                    variable: init:Topic.Continue
+                    prompt: Can I help with anything else?
+                    entity: BooleanPrebuiltEntity
+
+                  - kind: ConditionGroup
+                    id: condition-1
+                    conditions:
+                      - id: condition-1-item-0
+                        condition: =Topic.Continue = true
+                        actions:
+                          - kind: SendActivity
+                            id: sendMessage_4eOE6h
+                            activity: Go ahead. I'm listening.
+
+                    elseActions:
+                      - kind: SendActivity
+                        id: yHBz55
+                        activity: Ok, goodbye.
+
+                      - kind: EndConversation
+                        id: jh1GMT
+
+            elseActions:
+              - kind: Question
+                id: PM68ot
+                alwaysPrompt: true
+                variable: init:Topic.TryAgain
+                prompt: Sorry I wasn't able to help better. Would you like to try again?
+                entity: BooleanPrebuiltEntity
+
+              - kind: ConditionGroup
+                id: KNxYBf
+                conditions:
+                  - id: DPveFP
+                    condition: =Topic.TryAgain = false
+                    actions:
+                      - kind: BeginDialog
+                        id: cngqi4
+                        dialog: crf32_koneProfileAgent.topic.Escalate
+
+                elseActions:
+                  - kind: SendActivity
+                    id: GrVHEW
+                    activity: Go ahead. I'm listening.
+
+  - kind: DialogComponent
+    version: 8181183
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:11.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:11.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Sign in 
+    id: e2fd9a8a-b9b8-46d1-b58f-9a6a4636b3fb
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This system topic triggers when the copilot needs to sign in the user or require the user to sign in
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.Signin
+    dialog:
+      beginDialog:
+        kind: OnSignIn
+        id: main
+        actions:
+          - kind: ConditionGroup
+            id: conditionGroup_ypjGKL
+            conditions:
+              - id: conditionItem_7XYIIR
+                condition: =System.SignInReason = SignInReason.SignInRequired
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_1jHUNO
+                    activity: Hello! To be able to help you, I'll need you to sign in.
+
+          - kind: OAuthInput
+            id: gOjhZA
+            title: Login
+            text: To continue, please login
+
+  - kind: DialogComponent
+    version: 8181144
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-30T20:09:09.0000000Z
+      modifiedTimeUtc: 2025-01-30T20:09:09.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    displayName: Fallback
+    id: f565c445-0ca8-49ed-8f79-b84112ebe169
+    parentBotId: 9e772c00-46df-ef11-a730-000d3a81ed14
+    description: This system topic triggers when the user's utterance does not match any existing topics.
+    shareContext: {}
+    state: Active
+    status: Active
+    publisherUniqueName: DefaultPublisherorg5c6a527f
+    schemaName: crf32_koneProfileAgent.topic.Fallback
+    dialog:
+      beginDialog:
+        kind: OnUnknownIntent
+        id: main
+        actions:
+          - kind: ConditionGroup
+            id: conditionGroup_LktzXw
+            conditions:
+              - id: conditionItem_tlGIVo
+                condition: =System.FallbackCount < 3
+                actions:
+                  - kind: SendActivity
+                    id: sendMessage_QZreqo
+                    activity: I'm sorry, I'm not sure how to help with that. Can you try rephrasing?
+
+            elseActions:
+              - kind: BeginDialog
+                id: 5aXj5M
+                dialog: crf32_koneProfileAgent.topic.Escalate
+
+connectionReferences:
+  - version: 8245242
+    managedProperties:
+      isCustomizable: false
+      solutionId: fd140aae-4df4-11dd-bd17-0019b9312238
+
+    auditInfo:
+      createdTimeUtc: 2025-01-31T09:19:13.0000000Z
+      modifiedTimeUtc: 2025-01-31T09:19:13.0000000Z
+      createdBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+      modifiedBy: 0aed6c3d-5300-4f15-9172-c4606a0444fe
+
+    id: 9845bf75-a9b3-4c24-8189-105e35da41f1
+    connectionId: shared-msnweather-0fe7a16d-b5b2-4824-99cb-4eb0186b66e0
+    connectorId: /providers/Microsoft.PowerApps/apis/shared_msnweather
+    connectionReferenceLogicalName: crf32_koneProfileAgent.shared_msnweather.shared-msnweather-0fe7a16d-b5b2-4824-99cb-4eb0186b66e0
+    displayName: crf32_koneProfileAgent.shared_msnweather.shared-msnweather-0fe7a16d-b5b2-4824-99cb-4eb0186b66e0
+
+connectorDefinitions:
+  - connectorId: /providers/Microsoft.PowerApps/apis/shared_msnweather
+    version: 638721450928146300
+    displayName: MSN Weather
+    connectorType: Public
+    iconUri: https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/releases/v1.0.1720/1.0.1720.3960/msnweather/icon.png
+    changedTime: 2025-01-10T22:31:32.8146281Z
+    hasPublicData: true
+    operations:
+      - displayName: Get current weather
+        description: Get the current weather for a location.
+        inputType:
+          properties:
+            Location:
+              displayName: Location
+              description: The location search query. Valid inputs are City, Region, State, Country, Landmark, Postal Code, latitude and longitude
+              isRequired: true
+              order: 0
+              type: String
+
+            units:
+              displayName: Units
+              description: The measurement system used for all the meausre values in the request and response. Valid options are 'Imperial' and 'Metric'.
+              isRequired: true
+              order: 1
+              enumValues:
+                - I
+                - C
+              type: String
+
+        outputType:
+          kind: Record
+          properties:
+            responses:
+              order: 0
+              type:
+                kind: Record
+                properties:
+                  source:
+                    order: 1
+                    type:
+                      kind: Record
+                      properties:
+                        coordinates:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              lat:
+                                displayName: Latitude
+                                description: The latitude of the location.
+                                visibility: Advanced
+                                order: 0
+                                type: Number
+
+                              lon:
+                                displayName: Longitude
+                                description: The longitude of the location.
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                        location:
+                          displayName: Location
+                          description: The location for which provider created the current condition.
+                          order: 1
+                          type: String
+
+                  weather:
+                    order: 0
+                    type:
+                      kind: Record
+                      properties:
+                        current:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              baro:
+                                displayName: Pressure
+                                description: The atmospheric pressure.
+                                order: 0
+                                type: Number
+
+                              cap:
+                                displayName: Conditions
+                                description: A caption of weather conditions such as rainy, sunny, etc.
+                                order: 1
+                                type: String
+
+                              created:
+                                displayName: Last Updated
+                                description: The datetime at which provider created the current condition.
+                                order: 14
+                                type: DateTime
+
+                              dewPt:
+                                displayName: Dewpoint
+                                description: The temperature at which dew forms.
+                                visibility: Advanced
+                                order: 2
+                                type: Number
+
+                              feels:
+                                displayName: Apparent Temperature
+                                description: The apparent temperature, or feels-like temperature.
+                                visibility: Advanced
+                                order: 3
+                                type: Number
+
+                              rh:
+                                displayName: Humidity
+                                description: The relative humidity percentage.
+                                order: 4
+                                type: Number
+
+                              sky:
+                                displayName: METAR Sky Conditions
+                                description: The METAR code of sky conditions.
+                                visibility: Advanced
+                                order: 6
+                                type: String
+
+                              temp:
+                                displayName: Temperature
+                                description: The current temperature.
+                                order: 7
+                                type: Number
+
+                              uv:
+                                displayName: UV Index
+                                description: The numerical UV index.
+                                order: 8
+                                type: Number
+
+                              uvDesc:
+                                displayName: UV Index Description
+                                description: A description of the meaning of the UV index.
+                                visibility: Advanced
+                                order: 9
+                                type: String
+
+                              vis:
+                                displayName: Visibility Distance
+                                description: The visibility distance.
+                                visibility: Advanced
+                                order: 10
+                                type: Number
+
+                              windDir:
+                                displayName: Wind Direction
+                                description: The wind direction in degrees clockwise from north.
+                                visibility: Advanced
+                                order: 11
+                                type: Number
+
+                              windGust:
+                                displayName: Wind Gust Speed
+                                description: The wind gust speed.
+                                visibility: Advanced
+                                order: 13
+                                type: Number
+
+                              windSpd:
+                                displayName: Wind Speed
+                                description: The wind speed.
+                                order: 12
+                                type: Number
+
+                              wx:
+                                displayName: METAR weather conditions
+                                description: The METAR code of weather conditions.
+                                visibility: Advanced
+                                order: 5
+                                type: String
+
+            units:
+              order: 1
+              type:
+                kind: Record
+                properties:
+                  distance:
+                    displayName: Distance Units
+                    description: Units used for distance measurements.
+                    visibility: Advanced
+                    order: 3
+                    type: String
+
+                  pressure:
+                    displayName: Pressure Units
+                    description: Units used for pressure measurements.
+                    visibility: Advanced
+                    order: 0
+                    type: String
+
+                  speed:
+                    displayName: Speed Units
+                    description: Units used for speed measurements.
+                    visibility: Advanced
+                    order: 2
+                    type: String
+
+                  temperature:
+                    displayName: Temperature Units
+                    description: Units used for temperature measurements.
+                    order: 1
+                    type: String
+
+        operationId: CurrentWeather
+
+      - displayName: Get forecast for today
+        description: Get the forecast for the current day in the specified location.
+        inputType:
+          properties:
+            Location:
+              displayName: Location
+              description: The location search query. Valid inputs are City, Region, State, Country, Landmark, Postal Code, latitude and longitude
+              isRequired: true
+              order: 0
+              type: String
+
+            units:
+              displayName: Units
+              description: The measurement system used for all the meausre values in the request and response. Valid options are 'Imperial' and 'Metric'.
+              isRequired: true
+              order: 1
+              enumValues:
+                - I
+                - C
+              type: String
+
+        outputType:
+          kind: Record
+          properties:
+            responses:
+              order: 0
+              type:
+                kind: Record
+                properties:
+                  almanac:
+                    order: 1
+                    type:
+                      kind: Record
+                      properties:
+                        moonPhase:
+                          displayName: Moon Phase
+                          description: The phase of the moon the day of this forecast.
+                          visibility: Advanced
+                          order: 4
+                          type: String
+
+                        moonPhaseCode:
+                          displayName: Moon Phase Code
+                          description: The code representing the phase of the moon.
+                          visibility: Advanced
+                          order: 5
+                          type: String
+
+                        moonrise:
+                          displayName: Moonrise Time
+                          description: Time of moonrise on the day of this forecast.
+                          visibility: Advanced
+                          order: 2
+                          type: DateTime
+
+                        moonset:
+                          displayName: Moonset Time
+                          description: Time of moonset on the day of this forecast.
+                          visibility: Advanced
+                          order: 3
+                          type: DateTime
+
+                        sunrise:
+                          displayName: Sunrise Time
+                          description: Time of sunrise on the day of this forecast.
+                          visibility: Advanced
+                          order: 0
+                          type: DateTime
+
+                        sunset:
+                          displayName: Sunset Time
+                          description: Time of sunset on the day of this forecast.
+                          visibility: Advanced
+                          order: 1
+                          type: DateTime
+
+                  daily:
+                    order: 0
+                    type:
+                      kind: Record
+                      properties:
+                        created:
+                          displayName: Forecast Date
+                          description: The datetime at which the daily forecast was derived.
+                          visibility: Advanced
+                          order: 13
+                          type: DateTime
+
+                        day:
+                          displayName: Day
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              cap:
+                                displayName: Conditions
+                                description: The caption of weather conditions such as rainy, sunny, etc.
+                                visibility: Advanced
+                                order: 0
+                                type: String
+
+                              precip:
+                                displayName: Rain Chance
+                                description: The chance of precipitation (%).
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                              sky:
+                                displayName: METAR Sky Conditions
+                                description: The METAR code of sky conditions.
+                                visibility: Advanced
+                                order: 3
+                                type: String
+
+                              summary:
+                                displayName: Summary
+                                description: A text summary of the forecast.
+                                visibility: Advanced
+                                order: 6
+                                type: String
+
+                              windDir:
+                                displayName: Wind Direction
+                                description: The wind direction in degrees clockwise from north.
+                                visibility: Advanced
+                                order: 4
+                                type: Number
+
+                              windSpd:
+                                displayName: Wind Speed
+                                description: The wind speed.
+                                visibility: Advanced
+                                order: 5
+                                type: Number
+
+                              wx:
+                                displayName: METAR Weather Conditions
+                                description: The METAR code of weather conditions.
+                                visibility: Advanced
+                                order: 2
+                                type: String
+
+                        night:
+                          displayName: Night
+                          order: 1
+                          type:
+                            kind: Record
+                            properties:
+                              cap:
+                                displayName: Conditions
+                                description: The caption of weather conditions such as rainy, sunny, etc.
+                                visibility: Advanced
+                                order: 0
+                                type: String
+
+                              precip:
+                                displayName: Rain Chance
+                                description: The chance of precipitation (%).
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                              sky:
+                                displayName: METAR Sky Conditions
+                                description: The METAR code of sky conditions.
+                                visibility: Advanced
+                                order: 3
+                                type: String
+
+                              summary:
+                                displayName: Summary
+                                description: A text summary of the forecast.
+                                visibility: Advanced
+                                order: 6
+                                type: String
+
+                              windDir:
+                                displayName: Wind Direction
+                                description: The wind direction in degrees clockwise from north.
+                                visibility: Advanced
+                                order: 4
+                                type: Number
+
+                              windSpd:
+                                displayName: Wind Speed
+                                description: The wind speed.
+                                visibility: Advanced
+                                order: 5
+                                type: Number
+
+                              wx:
+                                displayName: METAR Weather Conditions
+                                description: The METAR code of weather conditions.
+                                visibility: Advanced
+                                order: 2
+                                type: String
+
+                        precip:
+                          displayName: Rain Chance
+                          description: The chance of precipitation (%).
+                          order: 4
+                          type: Number
+
+                        pvdrCap:
+                          displayName: Conditions
+                          description: The caption of weather conditions such as rainy, sunny, etc.
+                          order: 2
+                          type: String
+
+                        rhHi:
+                          displayName: Humidity High
+                          description: The high relative humidity point for the day.
+                          order: 7
+                          type: Number
+
+                        rhLo:
+                          displayName: Humidity Low
+                          description: The low relative humidity point for the day.
+                          order: 8
+                          type: Number
+
+                        tempHi:
+                          displayName: Temperature High
+                          description: The high temperature.
+                          order: 9
+                          type: Number
+
+                        tempLo:
+                          displayName: Temperature Low
+                          description: The low temperature.
+                          order: 10
+                          type: Number
+
+                        uv:
+                          displayName: UV Index
+                          description: The numerical UV index.
+                          order: 11
+                          type: Number
+
+                        uvDesc:
+                          displayName: UV Index Description
+                          description: A description of the meaning of the UV index.
+                          visibility: Advanced
+                          order: 12
+                          type: String
+
+                        valid:
+                          displayName: Date
+                          description: The datetime at which the forecast is valid.
+                          order: 3
+                          type: DateTime
+
+                        windMax:
+                          displayName: Max Wind Speed
+                          description: The peak wind speed for the day.
+                          order: 5
+                          type: Number
+
+                        windMaxDir:
+                          displayName: Max Wind Direction
+                          description: The direction of the peak wind for the day.
+                          visibility: Advanced
+                          order: 6
+                          type: Number
+
+                  source:
+                    order: 2
+                    type:
+                      kind: Record
+                      properties:
+                        coordinates:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              lat:
+                                displayName: Latitude
+                                description: The latitude of the location.
+                                visibility: Advanced
+                                order: 0
+                                type: Number
+
+                              lon:
+                                displayName: Longitude
+                                description: The longitude of the location.
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                        location:
+                          displayName: Location
+                          description: The location for which provider created the forecast.
+                          order: 1
+                          type: String
+
+            units:
+              order: 1
+              type:
+                kind: Record
+                properties:
+                  distance:
+                    displayName: Distance Units
+                    description: Units used for distance measurements.
+                    visibility: Advanced
+                    order: 3
+                    type: String
+
+                  pressure:
+                    displayName: Pressure Units
+                    description: Units used for pressure measurements.
+                    visibility: Advanced
+                    order: 0
+                    type: String
+
+                  speed:
+                    displayName: Speed Units
+                    description: Units used for speed measurements.
+                    visibility: Advanced
+                    order: 2
+                    type: String
+
+                  temperature:
+                    displayName: Temperature Units
+                    description: Units used for temperature measurements.
+                    order: 1
+                    type: String
+
+        operationId: TodaysForecast
+
+      - displayName: Get the forecast for tomorrow
+        description: Get the forecast for tomorrow in the specified location.
+        inputType:
+          properties:
+            Location:
+              displayName: Location
+              description: The location search query. Valid inputs are City, Region, State, Country, Landmark, Postal Code, latitude and longitude
+              isRequired: true
+              order: 0
+              type: String
+
+            units:
+              displayName: Units
+              description: The measurement system used for all the meausre values in the request and response. Valid options are 'Imperial' and 'Metric'.
+              isRequired: true
+              order: 1
+              enumValues:
+                - I
+                - C
+              type: String
+
+        outputType:
+          kind: Record
+          properties:
+            responses:
+              order: 0
+              type:
+                kind: Record
+                properties:
+                  almanac:
+                    order: 1
+                    type:
+                      kind: Record
+                      properties:
+                        moonPhase:
+                          displayName: Moon Phase
+                          description: The phase of the moon the day of this forecast.
+                          visibility: Advanced
+                          order: 4
+                          type: String
+
+                        moonPhaseCode:
+                          displayName: Moon Phase Code
+                          description: The code representing the phase of the moon.
+                          visibility: Advanced
+                          order: 5
+                          type: String
+
+                        moonrise:
+                          displayName: Moonrise Time
+                          description: Time of moonrise on the day of this forecast.
+                          visibility: Advanced
+                          order: 2
+                          type: DateTime
+
+                        moonset:
+                          displayName: Moonset Time
+                          description: Time of moonset on the day of this forecast.
+                          visibility: Advanced
+                          order: 3
+                          type: DateTime
+
+                        sunrise:
+                          displayName: Sunrise Time
+                          description: Time of sunrise on the day of this forecast.
+                          visibility: Advanced
+                          order: 0
+                          type: DateTime
+
+                        sunset:
+                          displayName: Sunset Time
+                          description: Time of sunset on the day of this forecast.
+                          visibility: Advanced
+                          order: 1
+                          type: DateTime
+
+                  daily:
+                    order: 0
+                    type:
+                      kind: Record
+                      properties:
+                        created:
+                          displayName: Forecast Date
+                          description: The datetime at which the daily forecast was derived.
+                          visibility: Advanced
+                          order: 13
+                          type: DateTime
+
+                        day:
+                          displayName: Day
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              cap:
+                                displayName: Conditions
+                                description: The caption of weather conditions such as rainy, sunny, etc.
+                                visibility: Advanced
+                                order: 0
+                                type: String
+
+                              precip:
+                                displayName: Rain Chance
+                                description: The chance of precipitation (%).
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                              sky:
+                                displayName: METAR Sky Conditions
+                                description: The METAR code of sky conditions.
+                                visibility: Advanced
+                                order: 3
+                                type: String
+
+                              summary:
+                                displayName: Summary
+                                description: A text summary of the forecast.
+                                visibility: Advanced
+                                order: 6
+                                type: String
+
+                              windDir:
+                                displayName: Wind Direction
+                                description: The wind direction in degrees clockwise from north.
+                                visibility: Advanced
+                                order: 4
+                                type: Number
+
+                              windSpd:
+                                displayName: Wind Speed
+                                description: The wind speed.
+                                visibility: Advanced
+                                order: 5
+                                type: Number
+
+                              wx:
+                                displayName: METAR Weather Conditions
+                                description: The METAR code of weather conditions.
+                                visibility: Advanced
+                                order: 2
+                                type: String
+
+                        night:
+                          displayName: Night
+                          order: 1
+                          type:
+                            kind: Record
+                            properties:
+                              cap:
+                                displayName: Conditions
+                                description: The caption of weather conditions such as rainy, sunny, etc.
+                                visibility: Advanced
+                                order: 0
+                                type: String
+
+                              precip:
+                                displayName: Rain Chance
+                                description: The chance of precipitation (%).
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                              sky:
+                                displayName: METAR Sky Conditions
+                                description: The METAR code of sky conditions.
+                                visibility: Advanced
+                                order: 3
+                                type: String
+
+                              summary:
+                                displayName: Summary
+                                description: A text summary of the forecast.
+                                visibility: Advanced
+                                order: 6
+                                type: String
+
+                              windDir:
+                                displayName: Wind Direction
+                                description: The wind direction in degrees clockwise from north.
+                                visibility: Advanced
+                                order: 4
+                                type: Number
+
+                              windSpd:
+                                displayName: Wind Speed
+                                description: The wind speed.
+                                visibility: Advanced
+                                order: 5
+                                type: Number
+
+                              wx:
+                                displayName: METAR Weather Conditions
+                                description: The METAR code of weather conditions.
+                                visibility: Advanced
+                                order: 2
+                                type: String
+
+                        precip:
+                          displayName: Rain Chance
+                          description: The chance of precipitation (%).
+                          order: 4
+                          type: Number
+
+                        pvdrCap:
+                          displayName: Conditions
+                          description: The caption of weather conditions such as rainy, sunny, etc.
+                          order: 2
+                          type: String
+
+                        rhHi:
+                          displayName: Humidity High
+                          description: The high relative humidity point for the day.
+                          order: 7
+                          type: Number
+
+                        rhLo:
+                          displayName: Humidity Low
+                          description: The low relative humidity point for the day.
+                          order: 8
+                          type: Number
+
+                        tempHi:
+                          displayName: Temperature High
+                          description: The high temperature.
+                          order: 9
+                          type: Number
+
+                        tempLo:
+                          displayName: Temperature Low
+                          description: The low temperature.
+                          order: 10
+                          type: Number
+
+                        uv:
+                          displayName: UV Index
+                          description: The numerical UV index.
+                          order: 11
+                          type: Number
+
+                        uvDesc:
+                          displayName: UV Index Description
+                          description: A description of the meaning of the UV index.
+                          visibility: Advanced
+                          order: 12
+                          type: String
+
+                        valid:
+                          displayName: Date
+                          description: The datetime at which the forecast is valid.
+                          order: 3
+                          type: DateTime
+
+                        windMax:
+                          displayName: Max Wind Speed
+                          description: The peak wind speed for the day.
+                          order: 5
+                          type: Number
+
+                        windMaxDir:
+                          displayName: Max Wind Direction
+                          description: The direction of the peak wind for the day.
+                          visibility: Advanced
+                          order: 6
+                          type: Number
+
+                  source:
+                    order: 2
+                    type:
+                      kind: Record
+                      properties:
+                        coordinates:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              lat:
+                                displayName: Latitude
+                                description: The latitude of the location.
+                                visibility: Advanced
+                                order: 0
+                                type: Number
+
+                              lon:
+                                displayName: Longitude
+                                description: The longitude of the location.
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                        location:
+                          displayName: Location
+                          description: The location for which provider created the forecast.
+                          order: 1
+                          type: String
+
+            units:
+              order: 1
+              type:
+                kind: Record
+                properties:
+                  distance:
+                    displayName: Distance Units
+                    description: Units used for distance measurements.
+                    visibility: Advanced
+                    order: 3
+                    type: String
+
+                  pressure:
+                    displayName: Pressure Units
+                    description: Units used for pressure measurements.
+                    visibility: Advanced
+                    order: 0
+                    type: String
+
+                  speed:
+                    displayName: Speed Units
+                    description: Units used for speed measurements.
+                    visibility: Advanced
+                    order: 2
+                    type: String
+
+                  temperature:
+                    displayName: Temperature Units
+                    description: Units used for temperature measurements.
+                    order: 1
+                    type: String
+
+        operationId: TomorrowsForecast
+
+    triggers:
+      - displayName: When the current weather changes
+        description: Triggers a new flow when the specified weather measure changes for a location.
+        inputType:
+          properties:
+            Location:
+              displayName: Location
+              description: The location search query. Valid inputs are City, Region, State, Country, Landmark, Postal Code, latitude and longitude
+              isRequired: true
+              order: 0
+              type: String
+
+            Measure:
+              displayName: Measure
+              description: The weather measure used for this operation. Valid options are 'Temperature', 'UV Index', 'Humidity' or 'Wind Speed'.
+              isRequired: true
+              order: 1
+              enumValues:
+                - Temperature
+                - UV Index
+                - Humidity
+                - Wind Speed
+              type: String
+
+            Target:
+              displayName: Target
+              description: The target value for the specified measure.
+              isRequired: true
+              order: 3
+              type: Number
+
+            units:
+              displayName: Units
+              description: The units for the measure value and the target value.
+              isRequired: true
+              order: 4
+              dynamicValuesConfig:
+                capability: List
+
+              type: String
+
+            When:
+              displayName: When the measure...
+              description: The condition the trigger will be checking. Valid options are 'Is equal to', 'Goes over', or 'Goes below'. For example, if the measure is 'temperature' and this parameter is set to 'Goes below' then the trigger will fire when the temperature goes below the target value.
+              isRequired: true
+              order: 2
+              enumValues:
+                - Is equal to
+                - Goes over
+                - Goes below
+              type: String
+
+        outputType:
+          kind: Record
+          properties:
+            responses:
+              order: 0
+              type:
+                kind: Record
+                properties:
+                  source:
+                    order: 1
+                    type:
+                      kind: Record
+                      properties:
+                        coordinates:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              lat:
+                                displayName: Latitude
+                                description: The latitude of the location.
+                                visibility: Advanced
+                                order: 0
+                                type: Number
+
+                              lon:
+                                displayName: Longitude
+                                description: The longitude of the location.
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                        location:
+                          displayName: Location
+                          description: The location for which provider created the current condition.
+                          order: 1
+                          type: String
+
+                  weather:
+                    order: 0
+                    type:
+                      kind: Record
+                      properties:
+                        current:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              baro:
+                                displayName: Pressure
+                                description: The atmospheric pressure.
+                                order: 0
+                                type: Number
+
+                              cap:
+                                displayName: Conditions
+                                description: A caption of weather conditions such as rainy, sunny, etc.
+                                order: 1
+                                type: String
+
+                              created:
+                                displayName: Last Updated
+                                description: The datetime at which provider created the current condition.
+                                order: 14
+                                type: DateTime
+
+                              dewPt:
+                                displayName: Dewpoint
+                                description: The temperature at which dew forms.
+                                visibility: Advanced
+                                order: 2
+                                type: Number
+
+                              feels:
+                                displayName: Apparent Temperature
+                                description: The apparent temperature, or feels-like temperature.
+                                visibility: Advanced
+                                order: 3
+                                type: Number
+
+                              rh:
+                                displayName: Humidity
+                                description: The relative humidity percentage.
+                                order: 4
+                                type: Number
+
+                              sky:
+                                displayName: METAR Sky Conditions
+                                description: The METAR code of sky conditions.
+                                visibility: Advanced
+                                order: 6
+                                type: String
+
+                              temp:
+                                displayName: Temperature
+                                description: The current temperature.
+                                order: 7
+                                type: Number
+
+                              uv:
+                                displayName: UV Index
+                                description: The numerical UV index.
+                                order: 8
+                                type: Number
+
+                              uvDesc:
+                                displayName: UV Index Description
+                                description: A description of the meaning of the UV index.
+                                visibility: Advanced
+                                order: 9
+                                type: String
+
+                              vis:
+                                displayName: Visibility Distance
+                                description: The visibility distance.
+                                visibility: Advanced
+                                order: 10
+                                type: Number
+
+                              windDir:
+                                displayName: Wind Direction
+                                description: The wind direction in degrees clockwise from north.
+                                visibility: Advanced
+                                order: 11
+                                type: Number
+
+                              windGust:
+                                displayName: Wind Gust Speed
+                                description: The wind gust speed.
+                                visibility: Advanced
+                                order: 13
+                                type: Number
+
+                              windSpd:
+                                displayName: Wind Speed
+                                description: The wind speed.
+                                order: 12
+                                type: Number
+
+                              wx:
+                                displayName: METAR weather conditions
+                                description: The METAR code of weather conditions.
+                                visibility: Advanced
+                                order: 5
+                                type: String
+
+            units:
+              order: 1
+              type:
+                kind: Record
+                properties:
+                  distance:
+                    displayName: Distance Units
+                    description: Units used for distance measurements.
+                    visibility: Advanced
+                    order: 3
+                    type: String
+
+                  pressure:
+                    displayName: Pressure Units
+                    description: Units used for pressure measurements.
+                    visibility: Advanced
+                    order: 0
+                    type: String
+
+                  speed:
+                    displayName: Speed Units
+                    description: Units used for speed measurements.
+                    visibility: Advanced
+                    order: 2
+                    type: String
+
+                  temperature:
+                    displayName: Temperature Units
+                    description: Units used for temperature measurements.
+                    order: 1
+                    type: String
+
+        triggerId: OnCurrentWeatherChange
+
+      - displayName: When the current conditions change
+        description: Triggers a new flow when the conditions change for a location.
+        inputType:
+          properties:
+            Location:
+              displayName: Location
+              description: The location search query. Valid inputs are City, Region, State, Country, Landmark, Postal Code, latitude and longitude
+              isRequired: true
+              order: 0
+              type: String
+
+            units:
+              displayName: Units
+              description: The measurement system used for all the meausre values in the request and response. Valid options are 'Imperial' and 'Metric'.
+              isRequired: true
+              order: 1
+              enumValues:
+                - I
+                - C
+              type: String
+
+        outputType:
+          kind: Record
+          properties:
+            responses:
+              order: 0
+              type:
+                kind: Record
+                properties:
+                  source:
+                    order: 1
+                    type:
+                      kind: Record
+                      properties:
+                        coordinates:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              lat:
+                                displayName: Latitude
+                                description: The latitude of the location.
+                                visibility: Advanced
+                                order: 0
+                                type: Number
+
+                              lon:
+                                displayName: Longitude
+                                description: The longitude of the location.
+                                visibility: Advanced
+                                order: 1
+                                type: Number
+
+                        location:
+                          displayName: Location
+                          description: The location for which provider created the current condition.
+                          order: 1
+                          type: String
+
+                  weather:
+                    order: 0
+                    type:
+                      kind: Record
+                      properties:
+                        current:
+                          order: 0
+                          type:
+                            kind: Record
+                            properties:
+                              baro:
+                                displayName: Pressure
+                                description: The atmospheric pressure.
+                                order: 0
+                                type: Number
+
+                              cap:
+                                displayName: Conditions
+                                description: A caption of weather conditions such as rainy, sunny, etc.
+                                order: 1
+                                type: String
+
+                              created:
+                                displayName: Last Updated
+                                description: The datetime at which provider created the current condition.
+                                order: 14
+                                type: DateTime
+
+                              dewPt:
+                                displayName: Dewpoint
+                                description: The temperature at which dew forms.
+                                visibility: Advanced
+                                order: 2
+                                type: Number
+
+                              feels:
+                                displayName: Apparent Temperature
+                                description: The apparent temperature, or feels-like temperature.
+                                visibility: Advanced
+                                order: 3
+                                type: Number
+
+                              rh:
+                                displayName: Humidity
+                                description: The relative humidity percentage.
+                                order: 4
+                                type: Number
+
+                              sky:
+                                displayName: METAR Sky Conditions
+                                description: The METAR code of sky conditions.
+                                visibility: Advanced
+                                order: 6
+                                type: String
+
+                              temp:
+                                displayName: Temperature
+                                description: The current temperature.
+                                order: 7
+                                type: Number
+
+                              uv:
+                                displayName: UV Index
+                                description: The numerical UV index.
+                                order: 8
+                                type: Number
+
+                              uvDesc:
+                                displayName: UV Index Description
+                                description: A description of the meaning of the UV index.
+                                visibility: Advanced
+                                order: 9
+                                type: String
+
+                              vis:
+                                displayName: Visibility Distance
+                                description: The visibility distance.
+                                visibility: Advanced
+                                order: 10
+                                type: Number
+
+                              windDir:
+                                displayName: Wind Direction
+                                description: The wind direction in degrees clockwise from north.
+                                visibility: Advanced
+                                order: 11
+                                type: Number
+
+                              windGust:
+                                displayName: Wind Gust Speed
+                                description: The wind gust speed.
+                                visibility: Advanced
+                                order: 13
+                                type: Number
+
+                              windSpd:
+                                displayName: Wind Speed
+                                description: The wind speed.
+                                order: 12
+                                type: Number
+
+                              wx:
+                                displayName: METAR weather conditions
+                                description: The METAR code of weather conditions.
+                                visibility: Advanced
+                                order: 5
+                                type: String
+
+            units:
+              order: 1
+              type:
+                kind: Record
+                properties:
+                  distance:
+                    displayName: Distance Units
+                    description: Units used for distance measurements.
+                    visibility: Advanced
+                    order: 3
+                    type: String
+
+                  pressure:
+                    displayName: Pressure Units
+                    description: Units used for pressure measurements.
+                    visibility: Advanced
+                    order: 0
+                    type: String
+
+                  speed:
+                    displayName: Speed Units
+                    description: Units used for speed measurements.
+                    visibility: Advanced
+                    order: 2
+                    type: String
+
+                  temperature:
+                    displayName: Temperature Units
+                    description: Units used for temperature measurements.
+                    order: 1
+                    type: String
+
+        triggerId: OnCurrentConditionsChange
