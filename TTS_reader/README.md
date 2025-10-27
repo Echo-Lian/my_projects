@@ -1,0 +1,1 @@
+This project aims to build some TTS (Text to Speech) Reader application from easiest to highest-quality, which includes concrete commands and small code examples, and point out trade-offs for example CPU vs GPU, offline vs cloud and licenses etc.
